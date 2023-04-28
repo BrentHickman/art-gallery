@@ -8,3 +8,4 @@
 * 1:30: started firebase tutorial
 * 2:15: reworking site plan and to-dos
 * 3:00: researching ways to display images
+* 4:15: proposal write-up
