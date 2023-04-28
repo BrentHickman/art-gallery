@@ -7,3 +7,4 @@
 * 11:00: researching image hosting
 * 1:30: started firebase tutorial
 * 2:15: reworking site plan and to-dos
+* 3:00: researching ways to display images
