@@ -9,3 +9,8 @@
 * 2:15: reworking site plan and to-dos
 * 3:00: researching ways to display images
 * 4:15: proposal write-up
+
+#### Friday, 05/05
+* 8:00 prioritize new to-dos
+* 8:20 researching how to combine C# and React
+* 9:20 
