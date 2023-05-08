@@ -15,3 +15,7 @@
 * 8:20 researching how to combine C# and React
 * 9:20 Setup
 * 1:30 - 4:00 interview prep, and interview. 
+
+#### Sunday, 05/07
+* 4:00 site diagram
+*
