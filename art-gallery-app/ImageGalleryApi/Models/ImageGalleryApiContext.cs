@@ -13,10 +13,9 @@ namespace ImageGalleryApi.Models
     {
       builder.Entity<Image>()
         .HasData(
-          new Image { ImageId = 1, Species = "Cat", Name = "Matilda", AgeYears = 0, AgeMonths = 6, Sex = "Female", Breed = "Domestic Short Hair", Weight = 3, Coloring = "Orange/White", Description = "Playful orange kitten Matilda came to us with her brother Rexie", DateAvailable = "4/10/2023" },
-          new Image { ImageId = 2, Species = "Cat", Name = "Rexie",AgeYears = 0, AgeMonths = 6, Sex = "Male", Breed = "Domestic Short Hair", Weight = 4, Coloring = "Gray/White", Description = "Mellow kitten Rexie came to us with his sister Matilda", DateAvailable = "4/10/2023"  },
-          new Image { ImageId = 3,  Species = "Dog", Name = "Danny", AgeYears = 2, AgeMonths = 6, Sex = "Male", Breed = "Boxer/Mix", Weight = 60, Coloring = "Brown/White", Description = "Fun guy Danny loves chasing bugs and taking naps", DateAvailable = "4/15/2023" },
-          new Image { ImageId = 4, Species = "Dog", Name = "Mary", AgeYears = 0, AgeMonths = 9, Sex = "Female", Breed = "Labrador", Weight = 35, Coloring = "Yellow", Description = "Mary is a sweet puppy who loves playing with kittens Matilda and Rexie", DateAvailable = "4/16/2023"  }
+          new Image { ImageId = 1, Title = "Test1", Description = "Test Landscape Painting", Size = "24in x 36in", Color1 = "Red", Color2 = "White", Color3 = "Orange", Subject = "Landscape", Medium = "Acrylic and Mixed media on Canvas", Date = "1/1/2000", Available = true, ImageUrl = "https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png" },
+          new Image { ImageId = 2, Title = "Test2", Description = "Test Portait Painting", Size = "24in x 24in", Color1 = "Green", Color2 = "White", Color3 = "Blue", Subject = "Portait", Medium = "Acrylic and Mixed media on Canvas", Date = "1/1/2000", Available = true, ImageUrl = "https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png" },
+          new Image { ImageId = 3, Title = "Test3", Description = "Test Portrait Relief Print", Size = "8in x 10in", Color1 = "Red", Color2 = "White", Color3 = "Black", Subject = "Portait", Medium = "Linoleum cut ink print on paper", Date = "1/1/2000", Available = true, ImageUrl = "https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png" }
         );
     }
   }

@@ -18,16 +18,16 @@ namespace ImageGalleryApi.Controllers.V2
 
     // GET: api/Images
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<Image>>> Get(string species, bool young)
+    public async Task<ActionResult<IEnumerable<Image>>> Get(string color1, bool available)
     {
       IQueryable<Image> query = _db.Images.AsQueryable();
-      if (species != null)
+      if (color1 != null)
       {
-        query = query.Where(entry => entry.Species == species);
+        query = query.Where(entry => entry.Color1 == color1);
       }
-        if (young == true)
+        if (available == true)
       {
-        query = query.Where(entry => entry.AgeYears <=1);
+        query = query.Where(entry => entry.Available);
       }
       return await query.ToListAsync();
     }
