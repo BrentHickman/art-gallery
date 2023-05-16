@@ -32,7 +32,9 @@ useEffect(() => {
             <li key={index}>
               <h3>{image.title}</h3>
               <p>{image.description}</p>
-              <p>{image.imageUrl}</p>
+              <div className='galleryImage'>
+                <img src={image.imageUrl} alt="Gallery Image"/>
+                </div>
             </li>
           )}
         </ul>
