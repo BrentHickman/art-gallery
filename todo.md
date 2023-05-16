@@ -24,9 +24,9 @@ X = done
 
       * DB:
         X Decide on Tech 
-          C# SQL DB with REACT Frontend
-        >Designate fields
-        >set up test data
+          C# API DB with REACT Frontend
+        X Designate fields
+        X set up test data
         >test querys
 
       
