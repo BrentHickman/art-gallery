@@ -10,7 +10,7 @@ useEffect(() => {
   fetch(`http://localhost:5261/v1/Images`)
     .then(response => response.json())
     .then((jsonifiedResponse) => {
-        setGallery(jsonifiedResponse.results)
+        setGallery(jsonifiedResponse)
         setIsLoaded(true)
       })
     .catch((error) => {
@@ -28,7 +28,7 @@ useEffect(() => {
       <React.Fragment>
         <h1>Gallery</h1>
         <ul>
-          {gallery.map((image, index) =>
+          {gallery && gallery.map((image, index) =>
             <li key={index}>
               <h3>{image.title}</h3>
               <p>{image.description}</p>
