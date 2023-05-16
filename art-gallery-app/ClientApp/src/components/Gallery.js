@@ -1,13 +1,21 @@
 import React, { useState, useEffect } from 'react';
-import { auth } from './../firebase.js';
+import { auth } from './../firebase';
 
 function Gallery() {
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [gallery, setGallery] = useState([]);
+  const [currentUser, setCurrentUser] = useState(null);
 
 
   useEffect(() => {
+    setCurrentUser(auth.currentUser);
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      setCurrentUser(user);
+    });
+
+
+
     fetch(`http://localhost:5261/v1/Images`)
       .then(response => response.json())
       .then((jsonifiedResponse) => {
@@ -18,9 +26,10 @@ function Gallery() {
         setError(error)
         setIsLoaded(true)
       });
+      return () => unsubscribe();
   }, []);
 
-  if (auth.currentUser == null) {
+  if (currentUser == null) {
     return (
       <React.Fragment>
         <h1>You must be signed in to access the Gallery.
@@ -28,7 +37,7 @@ function Gallery() {
         </h1>
       </React.Fragment>
     )
-  } else if (auth.currentUser != null) {
+  } else if (currentUser != null) {
 
     if (error) {
       return <h1>Error: {error}</h1>;
