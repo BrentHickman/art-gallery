@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { auth } from "./../firebase.js";
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "firebase/auth";
+import { NavMenu } from './NavMenu';
+
 
 function SignIn() {
   const [signUpSuccess, setSignUpSuccess] = useState(null);
@@ -44,6 +46,7 @@ function SignIn() {
 
   return (
     <React.Fragment>
+      { <NavMenu />}
       <h1>Sign up</h1>
       {signUpSuccess}
       <form onSubmit={doSignUp}>

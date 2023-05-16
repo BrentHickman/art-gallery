@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { NavMenu } from './NavMenu';
 import { auth } from './../firebase';
 
 function Gallery() {
@@ -44,9 +45,11 @@ function Gallery() {
     } else if (!isLoaded) {
       return <h1>...Loading...</h1>;
     } else {
+//limit number of images to display
       let imageLimit = 2;
       return (
         <React.Fragment>
+          { <NavMenu />}
           <h1>Gallery</h1>
           <ul>
             {gallery && gallery.map((image, index) =>
