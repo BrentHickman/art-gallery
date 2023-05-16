@@ -32,7 +32,15 @@ builder.Services.AddApiVersioning(options =>
 builder.Services.AddVersionedApiExplorer(options => options.GroupNameFormat = "'v'VVV");
 builder.Services.AddTransient<IConfigureOptions<SwaggerGenOptions>, ConfigureSwaggerGenOptions>();
 builder.Services.AddSwaggerGen();
-
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(builder =>
+    {
+        builder.AllowAnyOrigin()
+               .AllowAnyMethod()
+               .AllowAnyHeader();
+    });
+});
 
 var app = builder.Build();
 var provider = app.Services.GetRequiredService<IApiVersionDescriptionProvider>();
@@ -58,7 +66,7 @@ app.UseAuthorization();
 
 app.UseStaticFiles();
 app.UseRouting();
-
+app.UseCors();
 app.MapControllers();
 
 app.MapControllerRoute(
