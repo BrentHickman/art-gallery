@@ -44,11 +44,13 @@ function Gallery() {
     } else if (!isLoaded) {
       return <h1>...Loading...</h1>;
     } else {
+      let imageLimit = 2;
       return (
         <React.Fragment>
           <h1>Gallery</h1>
           <ul>
             {gallery && gallery.map((image, index) =>
+            index < imageLimit && (
               <li key={index}>
                 <h3>{image.title}</h3>
                 <p>{image.description}</p>
@@ -56,7 +58,7 @@ function Gallery() {
                   <img src={image.imageUrl} alt="Gallery Image" />
                 </div>
               </li>
-            )}
+            ))}
           </ul>
         </React.Fragment>
       );
