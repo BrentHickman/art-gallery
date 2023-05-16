@@ -7,7 +7,7 @@ function Gallery() {
 
 
 useEffect(() => {
-  fetch(`http://localhost:5261/swagger/index.html`)
+  fetch(`http://localhost:5261/v1/Images`)
     .then(response => response.json())
     .then((jsonifiedResponse) => {
         setGallery(jsonifiedResponse.results)
