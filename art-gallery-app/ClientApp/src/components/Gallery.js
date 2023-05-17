@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { NavMenu } from './NavMenu';
 import { auth } from './../firebase';
+import ImageDetail from './ImageDetail';
 
 function Gallery() {
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [gallery, setGallery] = useState([]);
   const [currentUser, setCurrentUser] = useState(null);
+  const [selectedImage, setSelectedImage] = useState(null);
 
 
   useEffect(() => {
@@ -14,8 +16,6 @@ function Gallery() {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       setCurrentUser(user);
     });
-
-
 
     fetch(`http://localhost:5261/v1/Images`)
       .then(response => response.json())
@@ -27,8 +27,16 @@ function Gallery() {
         setError(error)
         setIsLoaded(true)
       });
-      return () => unsubscribe();
+    return () => unsubscribe();
   }, []);
+
+  const handleClick = () => {
+    if (selectedImage != null) {
+      setSelectedImage(null);
+    } else {
+      setIsLoaded(!isLoaded);
+    }
+  }
 
   if (currentUser == null) {
     return (
@@ -39,30 +47,44 @@ function Gallery() {
       </React.Fragment>
     )
   } else if (currentUser != null) {
+    let currentlyVisibleState = null;
+    let buttonText = null;
 
     if (error) {
-      return <h1>Error: {error}</h1>;
+      currentlyVisibleState = <h1>Error: {error}</h1>
     } else if (!isLoaded) {
-      return <h1>...Loading...</h1>;
-    } else {
-//limit number of images to display
-      let imageLimit = 2;
-      return (
+      currentlyVisibleState = <h1>...Loading...</h1>
+    } else if (selectedImage != null) {
+      currentlyVisibleState =
         <React.Fragment>
-          { <NavMenu />}
-          <h1>Gallery</h1>
-          <ul>
-            {gallery && gallery.map((image, index) =>
+          {<ImageDetail
+            image={selectedImage} />}
+          {buttonText = "Return to Gallery"}
+
+        </React.Fragment>
+    } else {
+      //limit number of images to display
+      let imageLimit = 2;
+      currentlyVisibleState = <React.Fragment>
+        <h1>Gallery</h1>
+        <ul>
+          {gallery && gallery.map((image, index) =>
             index < imageLimit && (
               <li key={index}>
                 <h3>{image.title}</h3>
                 <p>{image.description}</p>
-                <div className='galleryImage'>
+                <div className='galleryImage' onClick = {() => image.whenImageClicked(image.id)}>
                   <img src={image.imageUrl} alt="Gallery Image" />
                 </div>
               </li>
             ))}
-          </ul>
+        </ul>
+      </React.Fragment>
+      return (
+        <React.Fragment>
+          {<NavMenu />}
+          {currentlyVisibleState}
+          {error ? null : <button onClick={handleClick}>{buttonText}</button>}
         </React.Fragment>
       );
     }
