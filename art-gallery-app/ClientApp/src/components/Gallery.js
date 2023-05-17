@@ -2,15 +2,16 @@ import React, { useState, useEffect } from 'react';
 import { NavMenu } from './NavMenu';
 import { auth } from './../firebase';
 import ImageDetail from './ImageDetail';
+import GalleryToolbar from './GalleryToolbar';
 
 function Gallery() {
   const [error, setError] = useState(null);
-  // const [isLoaded, setIsLoaded] = useState(false);
   const [gallery, setGallery] = useState([]);
   const [currentUser, setCurrentUser] = useState(null);
   const [selectedImage, setSelectedImage] = useState(null);
   const [fetching, setFetching] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [queryParam, setQueryParam] = useState('');
 
   useEffect(() => {
     setCurrentUser(auth.currentUser);
@@ -21,16 +22,18 @@ function Gallery() {
     return () => unsubscribe();
   }, []);
 
-  const fetchGallery = () => {
+  const fetchGallery = (queryParam) => {
     setFetching(true); // Set fetching state to true before making the request
+    const url = `http://localhost:5261/v1/Images${queryParam ? `?${queryParam}` : ''}`;
 
 
-    fetch(`http://localhost:5261/v1/Images`)
+    fetch(url)
     .then(response => response.json())
     .then((jsonifiedResponse) => {
       setGallery(jsonifiedResponse)
       setError(null);
       setIsLoaded(true);
+      setQueryParam('');
     })
     .catch((error) => {
       setError(error)
@@ -44,7 +47,7 @@ function Gallery() {
     if (selectedImage != null) {
       setSelectedImage(null);
     } else {
-      fetchGallery(); // Trigger the fetch request when the button is clicked
+      fetchGallery(queryParam); // Trigger the fetch request when the button is clicked
     }
     }
 
@@ -70,9 +73,6 @@ function Gallery() {
     if (error) {
       currentlyVisibleState = <h1>Error: {error}</h1>
     } 
-    else if (fetching) {
-      currentlyVisibleState = <h1>.....Loading</h1>
-    } 
     else if (selectedImage != null) {
       currentlyVisibleState = (
         <React.Fragment>
@@ -85,6 +85,7 @@ function Gallery() {
       let imageLimit = 3;
       currentlyVisibleState = (
         <React.Fragment>
+          <GalleryToolbar onFetchGallery={fetchGallery} />
           <h1>Gallery</h1>
           <ul>
             {gallery && gallery.slice(0, imageLimit).map((image) => (
@@ -109,8 +110,12 @@ function Gallery() {
     return (
       <React.Fragment>
         {<NavMenu />}
+        {error ? null : (
+          <button onClick={handleClick} disabled={fetching}>
+            {fetching ? 'Loading...' : buttonText}
+          </button>
+        )}
         {currentlyVisibleState}
-        {error ? null : <button onClick={handleClick}>{buttonText}</button>}
       </React.Fragment>
     );
   }
