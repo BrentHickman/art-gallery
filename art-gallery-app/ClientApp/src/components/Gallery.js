@@ -12,6 +12,8 @@ function Gallery() {
   const [fetching, setFetching] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
   const [queryParam, setQueryParam] = useState('');
+  const [imageLimit, setImageLimit] = useState(3);
+
 
   useEffect(() => {
     setCurrentUser(auth.currentUser);
@@ -51,6 +53,10 @@ function Gallery() {
     }
     }
 
+    const updateImageLimit = (limit) => {
+      // Update the image limit state
+      setImageLimit(limit);
+    };
 
   const handleChangingSelectedImage = (id) => {
     const selection = gallery.filter(image => image.imageId === id)[0];
@@ -82,10 +88,10 @@ function Gallery() {
       buttonText = "Return to Gallery";
     } else if (isLoaded) {
       //limit number of images to display
-      let imageLimit = 3;
+      // let imageLimit = 3;
       currentlyVisibleState = (
         <React.Fragment>
-          <GalleryToolbar onFetchGallery={fetchGallery} />
+          <GalleryToolbar onFetchGallery={fetchGallery} onUpdateImageLimit={updateImageLimit} />
           <h1>Gallery</h1>
           <ul>
             {gallery && gallery.slice(0, imageLimit).map((image) => (
