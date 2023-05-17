@@ -19,12 +19,16 @@ namespace ImageGalleryApi.Controllers.V1
 
     // GET: api/Images
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<Image>>> Get(string color1)
+    public async Task<ActionResult<IEnumerable<Image>>> Get(string color1, string color2)
     {
       IQueryable<Image> query = _db.Images.AsQueryable();
       if (color1 != null)
       {
         query = query.Where(entry => entry.Color1 == color1);
+      }
+      if (color2 != null)
+      {
+        query = query.Where(entry => entry.Color2 == color2);
       }
       return await query.ToListAsync();
     }
