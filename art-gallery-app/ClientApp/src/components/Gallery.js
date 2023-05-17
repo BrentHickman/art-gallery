@@ -69,7 +69,11 @@ function Gallery() {
 
     if (error) {
       currentlyVisibleState = <h1>Error: {error}</h1>
-    } else if (selectedImage != null) {
+    } 
+    else if (fetching) {
+      currentlyVisibleState = <h1>.....Loading</h1>
+    } 
+    else if (selectedImage != null) {
       currentlyVisibleState = (
         <React.Fragment>
           {<ImageDetail image={selectedImage} />}
