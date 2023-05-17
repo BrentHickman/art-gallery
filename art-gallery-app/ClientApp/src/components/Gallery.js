@@ -40,8 +40,8 @@ function Gallery() {
 
   const handleChangingSelectedImage = (id) => {
     const selection = gallery.filter(image => image.imageId === id)[0];
-    setSelectedImage(selection);
     console.log(selection);
+    setSelectedImage(selection);
   }
 
   if (currentUser == null) {
@@ -63,38 +63,37 @@ function Gallery() {
     } else if (selectedImage != null) {
       currentlyVisibleState =
         <React.Fragment>
-          <p>Hello</p>
-          {<ImageDetail
-            image={selectedImage} />}
+          {<ImageDetail image={selectedImage} />}
         </React.Fragment>
-          {buttonText = "Return to Gallery"}
+      buttonText = "Return to Gallery";
     } else {
       //limit number of images to display
       let imageLimit = 3;
-      currentlyVisibleState = <React.Fragment>
-        <h1>Gallery</h1>
-        <ul>
-          {gallery && gallery.map((image) => (
+      currentlyVisibleState =
+        <React.Fragment>
+          <h1>Gallery</h1>
+          <ul>
+            {gallery && gallery.slice(0, imageLimit).map((image) => (
               <li key={image.imageId}>
                 <h3>{image.title}</h3>
                 <h3>ID {image.imageId}</h3>
                 <p>{image.description}</p>
-                <div className='galleryImage' onClick = {() => handleChangingSelectedImage(image.imageId)}>
-                  <img src={image.imageUrl} alt="Gallery Image" />
+                <div className='galleryImage' onClick={() => handleChangingSelectedImage(image.imageId)}>
+                  <img src={image.imageUrl} alt="" />
                 </div>
               </li>
             ))}
-        </ul>
-      </React.Fragment>
-        buttonText = "Reload";
-      return (
-        <React.Fragment>
-          {<NavMenu />}
-          {currentlyVisibleState}
-          {error ? null : <button onClick={handleClick}>{buttonText}</button>}
+          </ul>
         </React.Fragment>
-      );
+      buttonText = "Reload";
     }
+    return (
+      <React.Fragment>
+        {<NavMenu />}
+        {currentlyVisibleState}
+        {error ? null : <button onClick={handleClick}>{buttonText}</button>}
+      </React.Fragment>
+    );
   }
 }
 
