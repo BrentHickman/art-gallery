@@ -34,8 +34,14 @@ function Gallery() {
     if (selectedImage != null) {
       setSelectedImage(null);
     } else {
-      setIsLoaded(!isLoaded);
+      setIsLoaded(true);
     }
+  }
+
+  const handleChangingSelectedImage = (id) => {
+    const selection = gallery.filter(image => image.imageId === id)[0];
+    setSelectedImage(selection);
+    console.log(selection);
   }
 
   if (currentUser == null) {
@@ -57,29 +63,30 @@ function Gallery() {
     } else if (selectedImage != null) {
       currentlyVisibleState =
         <React.Fragment>
+          <p>Hello</p>
           {<ImageDetail
             image={selectedImage} />}
-          {buttonText = "Return to Gallery"}
-
         </React.Fragment>
+          {buttonText = "Return to Gallery"}
     } else {
       //limit number of images to display
-      let imageLimit = 2;
+      let imageLimit = 3;
       currentlyVisibleState = <React.Fragment>
         <h1>Gallery</h1>
         <ul>
-          {gallery && gallery.map((image, index) =>
-            index < imageLimit && (
-              <li key={index}>
+          {gallery && gallery.map((image) => (
+              <li key={image.imageId}>
                 <h3>{image.title}</h3>
+                <h3>ID {image.imageId}</h3>
                 <p>{image.description}</p>
-                <div className='galleryImage' onClick = {() => image.whenImageClicked(image.id)}>
+                <div className='galleryImage' onClick = {() => handleChangingSelectedImage(image.imageId)}>
                   <img src={image.imageUrl} alt="Gallery Image" />
                 </div>
               </li>
             ))}
         </ul>
       </React.Fragment>
+        buttonText = "Reload";
       return (
         <React.Fragment>
           {<NavMenu />}
