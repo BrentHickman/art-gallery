@@ -5,11 +5,12 @@ import ImageDetail from './ImageDetail';
 
 function Gallery() {
   const [error, setError] = useState(null);
-  const [isLoaded, setIsLoaded] = useState(false);
+  // const [isLoaded, setIsLoaded] = useState(false);
   const [gallery, setGallery] = useState([]);
   const [currentUser, setCurrentUser] = useState(null);
   const [selectedImage, setSelectedImage] = useState(null);
-
+  const [fetching, setFetching] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
     setCurrentUser(auth.currentUser);
@@ -17,26 +18,36 @@ function Gallery() {
       setCurrentUser(user);
     });
 
-    fetch(`http://localhost:5261/v1/Images`)
-      .then(response => response.json())
-      .then((jsonifiedResponse) => {
-        setGallery(jsonifiedResponse)
-        setIsLoaded(true)
-      })
-      .catch((error) => {
-        setError(error)
-        setIsLoaded(true)
-      });
     return () => unsubscribe();
   }, []);
+
+  const fetchGallery = () => {
+    setFetching(true); // Set fetching state to true before making the request
+
+
+    fetch(`http://localhost:5261/v1/Images`)
+    .then(response => response.json())
+    .then((jsonifiedResponse) => {
+      setGallery(jsonifiedResponse)
+      setError(null);
+      setIsLoaded(true);
+    })
+    .catch((error) => {
+      setError(error)
+    })
+    .finally(() => {
+      setFetching(false); // Set fetching state to false when the request is completed
+    });
+  };
 
   const handleClick = () => {
     if (selectedImage != null) {
       setSelectedImage(null);
     } else {
-      setIsLoaded(true);
+      fetchGallery(); // Trigger the fetch request when the button is clicked
     }
-  }
+    }
+
 
   const handleChangingSelectedImage = (id) => {
     const selection = gallery.filter(image => image.imageId === id)[0];
@@ -58,18 +69,17 @@ function Gallery() {
 
     if (error) {
       currentlyVisibleState = <h1>Error: {error}</h1>
-    } else if (!isLoaded) {
-      currentlyVisibleState = <h1>...Loading...</h1>
     } else if (selectedImage != null) {
-      currentlyVisibleState =
+      currentlyVisibleState = (
         <React.Fragment>
           {<ImageDetail image={selectedImage} />}
-        </React.Fragment>
+        </React.Fragment> 
+        );
       buttonText = "Return to Gallery";
-    } else {
+    } else if (isLoaded) {
       //limit number of images to display
       let imageLimit = 3;
-      currentlyVisibleState =
+      currentlyVisibleState = (
         <React.Fragment>
           <h1>Gallery</h1>
           <ul>
@@ -85,8 +95,13 @@ function Gallery() {
             ))}
           </ul>
         </React.Fragment>
+      );
       buttonText = "Reload";
     }
+    else {
+      buttonText = "Load Gallery"
+    }
+
     return (
       <React.Fragment>
         {<NavMenu />}
