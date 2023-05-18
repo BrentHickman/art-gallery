@@ -46,9 +46,9 @@ function GalleryToolbar({ onFetchGallery, onUpdateImageLimit }) {
 
   return (
     <div className="row justify-content-center">
-      <div className='col-1'>
-          <div className="form-group">
-          <label htmlFor="imageLimit">Images:</label>
+      <div className='col-2'>
+        <div className="form-group">
+          <label htmlFor="imageLimit">Image Limit:</label>
           <br></br>
           <input
             type="number"
@@ -60,11 +60,11 @@ function GalleryToolbar({ onFetchGallery, onUpdateImageLimit }) {
           />
         </div>
 
-        <button className="btn btn-primary" onClick={handleFetchGallery}>
-          Submit
+        <button onClick={handleFetchGallery}>
+          Go
         </button>
-        </div>
-      <div className="col-2">
+      </div>
+      <div className="col-3">
         <div className="row justify-content-center">
           <div className="col">
             <div className="form-group">
@@ -92,7 +92,7 @@ function GalleryToolbar({ onFetchGallery, onUpdateImageLimit }) {
                 type="text"
                 className="form-control"
                 id="color3"
-                placeholder='Color 3'
+                placeholder='Third Color'
                 value={queryParams.color3}
                 onChange={handleQueryParamChange}
               />
@@ -101,69 +101,73 @@ function GalleryToolbar({ onFetchGallery, onUpdateImageLimit }) {
         </div>
       </div>
 
-      <div className="col-2">
-        <div className="form-group">
+      <div className="col-3">
+        <div className="row justify-content-center">
+          <div className="form-group">
+            <div className="form-group">
+              <input
+                type="text"
+                className="form-control"
+                id="title"
+                placeholder='Title'
+                value={queryParams.title}
+                onChange={handleQueryParamChange}
+              />
+            </div>
+            <input
+              type="text"
+              className="form-control"
+              id="description"
+              placeholder='Description'
+              value={queryParams.description}
+              onChange={handleQueryParamChange}
+            />
+          </div>
           <div className="form-group">
             <input
               type="text"
               className="form-control"
-              id="title"
-              placeholder='Title'
-              value={queryParams.title}
+              id="size"
+              placeholder='Size #in x #in'
+              value={queryParams.size}
               onChange={handleQueryParamChange}
             />
           </div>
-          <input
-            type="text"
-            className="form-control"
-            id="description"
-            placeholder='Description'
-            value={queryParams.description}
-            onChange={handleQueryParamChange}
-          />
-        </div>
-        <div className="form-group">
-          <input
-            type="text"
-            className="form-control"
-            id="size"
-            placeholder='Size #in x #in'
-            value={queryParams.size}
-            onChange={handleQueryParamChange}
-          />
         </div>
       </div>
 
-      <div className="col-2">
-        <div className="form-group">
+      <div className="col-3">
+        <div className="row justify-content-center">
+          <div className="form-group">
+            <div className="form-group">
+              <input
+                type="text"
+                className="form-control"
+                id="subject"
+                placeholder='Subject'
+                value={queryParams.subject}
+                onChange={handleQueryParamChange}
+              />
+            </div>
+            <input
+              type="text"
+              className="form-control"
+              id="medium"
+              placeholder='Medium'
+              value={queryParams.medium}
+              onChange={handleQueryParamChange}
+            />
+          </div>
           <div className="form-group">
             <input
               type="text"
               className="form-control"
-              id="subject"
-              placeholder='Subject'
-              value={queryParams.subject}
+              id="date"
+              placeholder='Year'
+              value={queryParams.date}
               onChange={handleQueryParamChange}
             />
           </div>
-          <input
-            type="text"
-            className="form-control"
-            id="medium"
-            placeholder='Medium'
-            value={queryParams.medium}
-            onChange={handleQueryParamChange}
-          />
-        </div>
-        <div className="form-group">
-          <input
-            type="text"
-            className="form-control"
-            id="date"
-            placeholder='Year'
-            value={queryParams.date}
-            onChange={handleQueryParamChange}
-          />
         </div>
       </div>
     </div>

@@ -30,19 +30,19 @@ function Gallery() {
 
 
     fetch(url)
-    .then(response => response.json())
-    .then((jsonifiedResponse) => {
-      setGallery(jsonifiedResponse)
-      setError(null);
-      setIsLoaded(true);
-      setQueryParam('');
-    })
-    .catch((error) => {
-      setError(error)
-    })
-    .finally(() => {
-      setFetching(false); // Set fetching state to false when the request is completed
-    });
+      .then(response => response.json())
+      .then((jsonifiedResponse) => {
+        setGallery(jsonifiedResponse)
+        setError(null);
+        setIsLoaded(true);
+        setQueryParam('');
+      })
+      .catch((error) => {
+        setError(error)
+      })
+      .finally(() => {
+        setFetching(false); // Set fetching state to false when the request is completed
+      });
   };
 
   const handleClick = () => {
@@ -51,12 +51,12 @@ function Gallery() {
     } else {
       fetchGallery(queryParam); // Trigger the fetch request when the button is clicked
     }
-    }
+  }
 
-    const updateImageLimit = (limit) => {
-      // Update the image limit state
-      setImageLimit(limit);
-    };
+  const updateImageLimit = (limit) => {
+    // Update the image limit state
+    setImageLimit(limit);
+  };
 
   const handleChangingSelectedImage = (id) => {
     const selection = gallery.filter(image => image.imageId === id)[0];
@@ -78,17 +78,24 @@ function Gallery() {
 
     if (error) {
       currentlyVisibleState = <h1>Error: {error}</h1>
-    } 
+    }
     else if (selectedImage != null) {
+      buttonText = "Return to Gallery";
       currentlyVisibleState = (
         <React.Fragment>
+
           {<ImageDetail image={selectedImage} />}
-        </React.Fragment> 
-        );
-      buttonText = "Return to Gallery";
+          <div className="d-flex justify-content-center align-items-center" style={{ minHeight: '2vh' }}>
+            {error ? null : (
+              <button onClick={handleClick} disabled={fetching}>
+                {fetching ? 'Loading...' : buttonText}
+              </button>
+            )}
+          </div>
+        </React.Fragment>
+      );
+
     } else if (isLoaded) {
-      //limit number of images to display
-      // let imageLimit = 3;
       currentlyVisibleState = (
         <React.Fragment>
           <GalleryToolbar onFetchGallery={fetchGallery} onUpdateImageLimit={updateImageLimit} />
@@ -98,27 +105,32 @@ function Gallery() {
                 <div className="galleryImage" onClick={() => handleChangingSelectedImage(image.imageId)}>
                   <div className='imageWrapper'>
                     <img src={image.imageUrl} alt="" className='img-fluid' />
-                </div>
+                  </div>
                 </div>
               </div>
             ))}
           </div>
         </React.Fragment>
       );
-      buttonText = "Reload";
     }
     else {
-      buttonText = "Load Gallery"
+      buttonText = "Enter Gallery"
+      currentlyVisibleState = (
+        <React.Fragment>
+          <div className="d-flex justify-content-center align-items-center" style={{ minHeight: '1vh' }}>
+            {error ? null : (
+              <button onClick={handleClick} disabled={fetching}>
+                {fetching ? 'Loading...' : buttonText}
+              </button>
+            )}
+          </div>
+        </React.Fragment>
+      )
     }
 
     return (
       <React.Fragment>
         {<NavMenu />}
-        {error ? null : (
-          <button onClick={handleClick} disabled={fetching}>
-            {fetching ? 'Loading...' : buttonText}
-          </button>
-        )}
         {currentlyVisibleState}
       </React.Fragment>
     );

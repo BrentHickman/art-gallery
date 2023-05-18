@@ -7,13 +7,32 @@ code {
   color: #E01A76;
 }
 
-.btn-primary {
+.btn {
   color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+  background-color: grey;
 }
 
 .imageWrapper {
-  padding: 0px;
-  margin: 0px;
+  padding-top: 30px;
+  margin-left: 20px;
+  margin-right: 20px;
 }
+
+.row {
+background-color: bisque;
+padding: 20px;
+}
+
+.navbar-expand-sm {
+  outline-color: #fff;
+  background-color: grey;
+}
+
+.navbar-expand-sm {
+  margin-bottom: 20px;
+}
+
+.col-2 {
+  padding-top: 35px;
+}
+
