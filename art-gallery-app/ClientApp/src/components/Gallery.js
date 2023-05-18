@@ -92,16 +92,17 @@ function Gallery() {
       currentlyVisibleState = (
         <React.Fragment>
           <GalleryToolbar onFetchGallery={fetchGallery} onUpdateImageLimit={updateImageLimit} />
-          <h1>Gallery</h1>
-          <ul>
+          <div className="row justify-content-center">
             {gallery && gallery.slice(0, imageLimit).map((image) => (
-              <li key={image.imageId}>
-                <div className='galleryImage' onClick={() => handleChangingSelectedImage(image.imageId)}>
-                  <img src={image.imageUrl} alt="" />
+              <div key={image.imageId} className="col-md-4 mb-3">
+                <div className="galleryImage" onClick={() => handleChangingSelectedImage(image.imageId)}>
+                  <div className='imageWrapper'>
+                    <img src={image.imageUrl} alt="" className='img-fluid' />
                 </div>
-              </li>
+                </div>
+              </div>
             ))}
-          </ul>
+          </div>
         </React.Fragment>
       );
       buttonText = "Reload";

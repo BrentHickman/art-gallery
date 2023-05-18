@@ -48,7 +48,8 @@ function GalleryToolbar({ onFetchGallery, onUpdateImageLimit }) {
     <div className="row justify-content-center">
       <div className='col-1'>
           <div className="form-group">
-          <label htmlFor="imageLimit">Gallery Size:</label>
+          <label htmlFor="imageLimit">Images:</label>
+          <br></br>
           <input
             type="number"
             className="form-control"
@@ -58,6 +59,7 @@ function GalleryToolbar({ onFetchGallery, onUpdateImageLimit }) {
             min="1"
           />
         </div>
+
         <button className="btn btn-primary" onClick={handleFetchGallery}>
           Submit
         </button>
