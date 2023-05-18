@@ -96,9 +96,6 @@ function Gallery() {
           <ul>
             {gallery && gallery.slice(0, imageLimit).map((image) => (
               <li key={image.imageId}>
-                <h3>{image.title}</h3>
-                <h3>ID {image.imageId}</h3>
-                <p>{image.description}</p>
                 <div className='galleryImage' onClick={() => handleChangingSelectedImage(image.imageId)}>
                   <img src={image.imageUrl} alt="" />
                 </div>

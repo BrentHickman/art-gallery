@@ -19,9 +19,17 @@ namespace ImageGalleryApi.Controllers.V1
 
     // GET: api/Images
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<Image>>> Get(string color1, string color2)
+    public async Task<ActionResult<IEnumerable<Image>>> Get(string title, string size, string color1, string color2, string color3, string subject, string medium, string date)
     {
       IQueryable<Image> query = _db.Images.AsQueryable();
+      if (title != null)
+      {
+        query = query.Where(entry => entry.Title == title);
+      }
+      if (size != null)
+      {
+        query = query.Where(entry => entry.Size == size);
+      }
       if (color1 != null)
       {
         query = query.Where(entry => entry.Color1 == color1);
@@ -29,6 +37,22 @@ namespace ImageGalleryApi.Controllers.V1
       if (color2 != null)
       {
         query = query.Where(entry => entry.Color2 == color2);
+      }
+      if (color3 != null)
+      {
+        query = query.Where(entry => entry.Color3 == color3);
+      }
+      if (subject != null)
+      {
+        query = query.Where(entry => entry.Subject == subject);
+      }
+      if (medium != null)
+      {
+        query = query.Where(entry => entry.Medium == medium);
+      }
+      if (date != null)
+      {
+        query = query.Where(entry => entry.Date == date);
       }
       return await query.ToListAsync();
     }
