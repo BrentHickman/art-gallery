@@ -23,6 +23,7 @@
 
 import React from 'react';
 import '../custom.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import SignIn from './SignIn';
 import Gallery from './Gallery';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
