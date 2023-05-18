@@ -45,6 +45,7 @@ function GalleryToolbar({ onFetchGallery, onUpdateImageLimit }) {
   }, [limitValue, onUpdateImageLimit]);
 
   return (
+    
     <div className="row justify-content-center">
       <div className='col-2'>
         <div className="form-group">
