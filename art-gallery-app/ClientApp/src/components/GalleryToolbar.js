@@ -13,7 +13,7 @@ function GalleryToolbar({ onFetchGallery, onUpdateImageLimit }) {
     date: ''
   });
 
-  const [limitValue, setLimitValue] = useState(3);
+  const [limitValue, setLimitValue] = useState(100);
 
   const handleQueryParamChange = (event) => {
     const { id, value } = event.target;
@@ -72,7 +72,7 @@ function GalleryToolbar({ onFetchGallery, onUpdateImageLimit }) {
                 type="text"
                 className="form-control"
                 id="color1"
-                placeholder='Color 1'
+                placeholder='Priamary Color'
                 value={queryParams.color1}
                 onChange={handleQueryParamChange}
               />
@@ -82,7 +82,7 @@ function GalleryToolbar({ onFetchGallery, onUpdateImageLimit }) {
                 type="text"
                 className="form-control"
                 id="color2"
-                placeholder='Color 2'
+                placeholder='Secondary Color'
                 value={queryParams.color2}
                 onChange={handleQueryParamChange}
               />
@@ -127,7 +127,7 @@ function GalleryToolbar({ onFetchGallery, onUpdateImageLimit }) {
             type="text"
             className="form-control"
             id="size"
-            placeholder='Size ( #in x #in )'
+            placeholder='Size #in x #in'
             value={queryParams.size}
             onChange={handleQueryParamChange}
           />
@@ -160,7 +160,7 @@ function GalleryToolbar({ onFetchGallery, onUpdateImageLimit }) {
             type="text"
             className="form-control"
             id="date"
-            placeholder='Date ( DD/MM/YYYY )'
+            placeholder='Year'
             value={queryParams.date}
             onChange={handleQueryParamChange}
           />

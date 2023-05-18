@@ -2,6 +2,7 @@
 using ImageGalleryApi.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -9,9 +10,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ImageGalleryApi.Migrations
 {
     [DbContext(typeof(ImageGalleryApiContext))]
-    partial class ImageGalleryApiContextModelSnapshot : ModelSnapshot
+    [Migration("20230518013156_TestImg")]
+    partial class TestImg
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -126,7 +128,7 @@ namespace ImageGalleryApi.Migrations
                             Color3 = "Blue",
                             Date = "1/1/2000",
                             Description = "Test Landscape Relief Print",
-                            ImageUrl = "https://i.ibb.co/pwmzc6B/art-gallery-diagram.png",
+                            ImageUrl = "https://www.dropbox.com/s/v92tzxbk8m1tvb6/art-gallery-diagram.png?dl=0",
                             Medium = "Linoleum cut ink print on paper",
                             Size = "12in x 9in",
                             Subject = "Landscape",
