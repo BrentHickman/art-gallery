@@ -49,7 +49,7 @@ function Gallery() {
     if (selectedImage != null) {
       setSelectedImage(null);
     } else {
-      fetchGallery(queryParam); // Trigger the fetch request when the button is clicked
+      fetchGallery(queryParam); // Trigger the fetch request 
     }
   }
 
